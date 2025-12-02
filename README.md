@@ -4,8 +4,8 @@
 ![OpenCV](https://img.shields.io/badge/OpenCV-4.8.0.76-green)
 ![Status](https://img.shields.io/badge/Estado-En%20Desarrollo-yellow)
 
-> **Institución:** Universidad Pontificia Comillas (ICAI) - Ingeniería Matemática
-> **Asignatura:** Visión por Ordenador I
+> **Institución:** Universidad Pontificia Comillas (ICAI) - Ingeniería Matemática<br>
+> **Asignatura:** Visión por Ordenador I<br>
 > **Curso:** 2025/2026
 
 ## 📖 Descripción del Proyecto
