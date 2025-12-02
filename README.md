@@ -34,20 +34,3 @@ El flujo de trabajo se divide en los siguientes bloques:
 3.  **Sistema de Seguridad (Desactivación):**
     * **Detector de Patrones:** Reconocimiento de formas geométricas básicas.
     * **Decodificador de Secuencia:** Lógica de estados que valida una secuencia ordenada (ej. Círculo -> Círculo -> Línea -> Línea). Solo al completar la secuencia correcta se apaga la alarma.
-
----
-
-## 🚀 Requisitos e Instalación
-
-### Hardware
-* Webcam o cámara de Smartphone (conectada vía IP o USB).
-* PC con entorno Python configurado.
-* Patrones impresos o digitales (para la secuencia de desbloqueo).
-
-### Software
-Clonar el repositorio e instalar las dependencias:
-
-```bash
-git clone [https://github.com/usuario/smart-wake-up.git](https://github.com/usuario/smart-wake-up.git)
-cd smart-wake-up
-pip install -r requirements.txt
