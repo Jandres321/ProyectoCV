@@ -1,50 +1,53 @@
-# Smart Wake-Up System: Proyecto Final de Visión por Ordenador
+# Smart Wake-Up System: Proyecto Final de Visión por Ordenador I
 
 ![Python](https://img.shields.io/badge/Python-3.8%2B-blue)
-![OpenCV](https://img.shields.io/badge/OpenCV-4.x-green)
+![OpenCV](https://img.shields.io/badge/OpenCV-4.8.0.76-green)
 ![Status](https://img.shields.io/badge/Estado-En%20Desarrollo-yellow)
 
-> [cite_start]**Institución:** Universidad Pontificia Comillas (ICAI) - Ingeniería Matemática [cite: 1, 6]
-> [cite_start]**Asignatura:** Visión por Ordenador I [cite: 3]
+> **Institución:** Universidad Pontificia Comillas (ICAI) - Ingeniería Matemática
+> **Asignatura:** Visión por Ordenador I
 > **Curso:** 2025/2026
 
 ## 📖 Descripción del Proyecto
 
-Este proyecto consiste en un sistema de visión artificial diseñado para funcionar como un **despertador inteligente**. El sistema monitoriza a un usuario durmiendo y garantiza que la alarma no se desactive hasta que se detecte efectivamente que el usuario se ha despertado y está activo.
+Este proyecto implementa un **sistema de despertar inteligente** basado en visión por ordenador. A diferencia de las alarmas tradicionales, este sistema monitoriza al usuario mientras duerme mediante una cámara y utiliza un tracker para verificar si se ha levantado.
 
-[cite_start]El sistema integra módulos obligatorios de seguridad (decodificación de patrones visuales) y un módulo de aplicación libre (seguimiento del usuario al despertar)[cite: 32, 33].
+Para garantizar que el usuario está completamente despierto y cognitivamente activo, el sistema integra un **módulo de seguridad** que impide desactivar la alarma hasta que se muestra a la cámara una secuencia específica de patrones visuales.
 
-### 🎯 Objetivo
-Implementar un sistema robusto que:
-1.  **Valide la identidad/acceso** mediante patrones visuales (Módulo de Seguridad).
-2.  **Detecte y siga** al usuario (Tracker) para confirmar que está despierto.
-3.  [cite_start]Funcione en **tiempo real** con una tasa de refresco adecuada[cite: 65].
+### 🎯 Funcionalidades Principales
+1.  **Monitorización del sueño:** Uso de *tracking* para detectar la presencia o movimiento del usuario en la cama.
+2.  **Validación de despertar:** La alarma persiste hasta que se cumple la condición de desbloqueo.
+3.  **Desbloqueo por Patrones:** Decodificación de una secuencia visual (círculos/líneas) para desactivar el sistema (Requisito de Seguridad).
 
 ---
 
 ## ⚙️ Arquitectura del Sistema
 
-[cite_start]El proyecto sigue la metodología de diagrama de bloques requerida en el curso[cite: 70, 72]:
+El flujo de trabajo se divide en los siguientes bloques:
 
-1.  [cite_start]**Calibración (Offline):** Corrección de la distorsión de la lente de la cámara.
-2.  **Sistema de Seguridad (Bloque 1):**
-    * [cite_start]**Detector de Patrones:** Identificación de formas (círculos, líneas)[cite: 57].
-    * [cite_start]**Decodificador:** Lógica de estado que desbloquea la siguiente fase tras mostrar una secuencia correcta de 4 patrones[cite: 58].
-    * *Uso en este proyecto:* [EXPLICA AQUÍ: Ej. "El usuario debe mostrar una secuencia de patrones impresa para 'armar' la alarma antes de dormir" o "Para apagar la alarma, además de despertarse, debe mostrar un código visual"].
-3.  **Sistema Propuesto - Despertador (Bloque 2):**
-    * [cite_start]**Tracker:** Algoritmo de seguimiento (Bounding Box) que detecta el movimiento del usuario al despertar.
-    * **Lógica de Alarma:** La señal acústica persiste hasta que el tracker valida actividad sostenida.
+1.  **Calibración (Offline):**
+    * Cálculo de la matriz intrínseca de la cámara y coeficientes de distorsión para corregir la entrada de vídeo.
+    
+2.  **Sistema Propuesto (Vigilancia):**
+    * **Tracker:** Se inicializa una *Bounding Box* sobre el usuario. Si el tracker detecta movimiento significativo o la ausencia del usuario (al levantarse), se activa el estado de "Alerta/Validación".
+    
+3.  **Sistema de Seguridad (Desactivación):**
+    * **Detector de Patrones:** Reconocimiento de formas geométricas básicas.
+    * **Decodificador de Secuencia:** Lógica de estados que valida una secuencia ordenada (ej. Círculo -> Círculo -> Línea -> Línea). Solo al completar la secuencia correcta se apaga la alarma.
 
 ---
 
-## 🚀 Instalación y Requisitos
+## 🚀 Requisitos e Instalación
 
 ### Hardware
-* [cite_start]Cámara Web o Cámara de Smartphone (conectada via IP/USB)[cite: 40, 50].
-* Ordenador con capacidad de procesamiento de vídeo.
+* Webcam o cámara de Smartphone (conectada vía IP o USB).
+* PC con entorno Python configurado.
+* Patrones impresos o digitales (para la secuencia de desbloqueo).
 
 ### Software
-Este proyecto utiliza Python. Para instalar las dependencias necesarias:
+Clonar el repositorio e instalar las dependencias:
 
 ```bash
+git clone [https://github.com/usuario/smart-wake-up.git](https://github.com/usuario/smart-wake-up.git)
+cd smart-wake-up
 pip install -r requirements.txt
