@@ -23,10 +23,10 @@ def compute_contours(img_gray):
     blurred_img = cv2.GaussianBlur(img_gray, (5, 5), 0)  # Suavizado gausiano
     img_thres = cv2.adaptiveThreshold(blurred_img, 255, cv2.ADAPTIVE_THRESH_GAUSSIAN_C, cv2.THRESH_BINARY_INV, 11, 2)
     img_morph = cv2.morphologyEx(img_thres, cv2.MORPH_OPEN, np.ones((3,3), np.uint8))  # Apertura morfológica
-    contours, hierchary = cv2.findContours(img_morph, mode=cv2.RETR_EXTERNAL, method=cv2.CHAIN_APPROX_SIMPLE)
-    return contours, hierchary
+    contours, _ = cv2.findContours(img_morph, mode=cv2.RETR_EXTERNAL, method=cv2.CHAIN_APPROX_SIMPLE)
+    return contours
 
-def detect_pattern(contours, hierchary, img_shape):
+def detect_pattern(contours, img_shape):
     max_area = 0
     detected_pattern = None
     best_approx = None
@@ -193,8 +193,8 @@ def main(video_source, width=1280, height=720, mtx=None, dist=None):
                 cv2.rectangle(frame_display, (roi_x, roi_y), (roi_x + ROI_SIZE, roi_y + ROI_SIZE), ROI_COLOR, 2)
                 gray_roi = gray[roi_y:roi_y+ROI_SIZE, roi_x:roi_x+ROI_SIZE]
                 
-                contours, hierchary = compute_contours(gray_roi)
-                pattern, approx = detect_pattern(contours, hierchary, gray_roi.shape)
+                contours = compute_contours(gray_roi)
+                pattern, approx = detect_pattern(contours, gray_roi.shape)
 
                 if pattern:
                     expected_shape = EXPECTED_SEQUENCE[len(detected_sequence)]
