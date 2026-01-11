@@ -23,7 +23,7 @@ def compute_contours(img_gray):
     blurred_img = cv2.GaussianBlur(img_gray, (5, 5), 0)  # Suavizado gausiano
     img_thres = cv2.adaptiveThreshold(blurred_img, 255, cv2.ADAPTIVE_THRESH_GAUSSIAN_C, cv2.THRESH_BINARY_INV, 11, 2)
     img_morph = cv2.morphologyEx(img_thres, cv2.MORPH_OPEN, np.ones((3,3), np.uint8))  # Apertura morfológica
-    contours, hierchary = cv2.findContours(img_morph, mode=cv2.RETR_TREE, method=cv2.CHAIN_APPROX_SIMPLE)
+    contours, hierchary = cv2.findContours(img_morph, mode=cv2.RETR_EXTERNAL, method=cv2.CHAIN_APPROX_SIMPLE)
     return contours, hierchary
 
 def detect_pattern(contours, hierchary, img_shape):
